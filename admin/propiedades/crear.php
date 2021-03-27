@@ -2,33 +2,58 @@
     // Base de Datos
     require '../../includes/config/database.php';
     $db = conectarDB();
+    // var_dump($db);
+    
+    // echo "<pre>";
+    // var_dump($_POST); // Los valores que se han mandado por POST
+    // var_dump($_GET); // LOs valores que se han mandado por GET. Se ven en URL.
+    // echo "</pre>";
 
-    var_dump($db);
+    // Informacion del Servidor,
+    // echo "<pre>";
+    // var_dump($_SERVER["SERVER_SOFTWARE"]);
+    // var_dump($_SERVER["REQUEST_METHOD"]);
+    // echo "</pre>";
 
 
+    // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    //     echo "<pre>";
+    //     var_dump($_POST); // Los valores que se han mandado por POST
+    //     var_dump($_POST["titulo"]); // Los valores que se han mandado por POST
+    //     echo "</pre>";
+    // }
+
+
+    $titulo = $_POST["titulo"];
+    $precio = $_POST["precio"];
 
 
 
     require '../../includes/funciones.php';
     incluirTemplate('header');
 ?>  
+
+
+
+
+
     <main class="contenedor seccion">
         <h1>Crear</h1>
 
         <a href="/admin" class="boton boton-verde">Volver</a>
 
-        <form action="" class="formulario">
+        <form method="POST" class="formulario" action="/admin/propiedades/crear.php">
             <fieldset>
                 <legend>Informacion General</legend>
 
                 <label for="titulo">Titulo:</label>
-                <input type="text" id="titulo" placeholder="Titulo Propiedad">
+                <input type="text" id="titulo" name="titulo" placeholder="Titulo Propiedad">
 
                 <label for="precio">Precio:</label>
-                <input type="number" id="precio" placeholder="Precio Propiedad">
+                <input type="number" id="precio" name="precio" placeholder="Precio Propiedad">
 
                 <label for="imagen">Imagen:</label>
-                <input type="file" id="imagen" accept="image/jpeg, image/png">
+                <input type="file" id="imagen" name="imagen" accept="image/jpeg, image/png">
 
                 <label for="descripcion">Descripcion:</label>
                 <textarea id="descripcion"></textarea>
