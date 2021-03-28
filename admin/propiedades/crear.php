@@ -116,10 +116,10 @@
             $resultado = mysqli_query($db,$query);
             
             if($resultado){
-                echo "Insertado correctamente";
+                // echo "Insertado correctamente";
 
                 // Redirecionar al usuario
-                header('Location: /admin');
+                header('Location: /admin?resultado=1');
             }
         }
         
