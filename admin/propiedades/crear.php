@@ -7,7 +7,13 @@
     $errores = [];
 
     // Ejecuta el codigo despues de que el usuario envie el formulario
-    
+    $titulo = '';
+    $precio = '';
+    $descripcion = '';
+    $habitaciones = '';
+    $wc = '';
+    $estacionamiento = '';
+    $vendedorId = '';
 
 
 
@@ -88,43 +94,86 @@
 
         <form method="POST" class="formulario" action="/admin/propiedades/crear.php">
             <fieldset>
+
                 <legend>Informacion General</legend>
 
                 <label for="titulo">Titulo:</label>
-                <input type="text" id="titulo" name="titulo" placeholder="Titulo Propiedad">
+                <input 
+                    type="text" 
+                    id="titulo" 
+                    name="titulo" 
+                    placeholder="Titulo Propiedad" 
+                    value="<?php echo $titulo; ?>"
+                >
 
                 <label for="precio">Precio:</label>
-                <input type="number" id="precio" name="precio" placeholder="Precio Propiedad">
+                <input 
+                    type="number" 
+                    id="precio" 
+                    name="precio" 
+                    placeholder="Precio Propiedad" 
+                    value="<?php echo $precio; ?>"
+                >
 
                 <label for="imagen">Imagen:</label>
                 <input type="file" id="imagen" accept="image/jpeg, image/png">
 
                 <label for="descripcion">Descripcion:</label>
-                <textarea id="descripcion" name="descripcion"></textarea>
+                <textarea id="descripcion" name="descripcion">
+                    <?php echo $descripcion; ?>
+                </textarea>
+
             </fieldset>
             
 
             <fieldset>
+
                 <legend>Informacion Propiedad</legend>
 
                 <label for="habitaciones">Habitaciones:</label>
-                <input type="number" id="habitaciones" name="habitaciones"  placeholder="Numero Habitaciones 1-9" min="1" max="9" step="1">
+                <input 
+                    type="number" 
+                    id="habitaciones" 
+                    name="habitaciones"  
+                    placeholder="Numero Habitaciones 1-9" 
+                    min="1" 
+                    max="9" 
+                    step="1" 
+                    value="<?php echo $habitaciones; ?>"
+                >
 
                 <label for="wc">WC:</label>
-                <input type="number" id="wc" name="wc" placeholder="Numero wc Propiedad 1-9" min="1" max="9" step="1">
+                <input 
+                    type="number" 
+                    id="wc" name="wc" 
+                    placeholder="Numero wc Propiedad 1-9" 
+                    min="1" 
+                    max="9" 
+                    step="1" 
+                    value="<?php echo $wc; ?>"
+                >
 
                 <label for="estacionamiento">Estacionamiento:</label>
-                <input type="number" id="estacionamiento" name="estacionamiento" placeholder="Estacionamientos para Coches 1-9" min="1" max="9" step="1">
+                <input 
+                    type="number" 
+                    id="estacionamiento" 
+                    name="estacionamiento" 
+                    placeholder="Estacionamientos para Coches 1-9" 
+                    min="1" 
+                    max="9" 
+                    step="1" 
+                    value="<?php echo $estacionamiento; ?>"
+                >
 
             </fieldset>
 
             <fieldset>
                 <legend>Vendedor</legend>
 
-                <select name="vendedor">
+                <select name="vendedor" value="<?php echo $vendedorId; ?>">
                     <option value="">-- Seleccione --</option>
-                    <option value="1">Juan</option>
-                    <option value="2">Pedro</option>
+                    <option value="1">Andres</option>
+                    <option value="2">Juan</option>
                 </select>
             </fieldset>
 
