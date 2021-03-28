@@ -27,9 +27,9 @@
         // echo "<pre>";
         // var_dump($_POST);
         // echo "</pre>";
-        echo "<pre>";
-        var_dump($_FILES);
-        echo "</pre>";
+        // echo "<pre>";
+        // var_dump($_FILES);
+        // echo "</pre>";
 
 
         $titulo = mysqli_real_escape_string($db, $_POST["titulo"]);
@@ -74,8 +74,8 @@
         if (!$imagen['name'] || $imagen['error']) {
             $errores[] = "Debes seleccionar una imagen";
         }
-        // Validar las imagenes por tamaño (100Kb)
-        $medida = 1000 * 100;
+        // Validar las imagenes por tamaño (1000Kb)
+        $medida = 1000 * 1000;
         if ($imagen['size'] > $medida) {
             $errores[] = "Tamaño imagen grande, Max: 100Kb";
         }
@@ -86,9 +86,30 @@
         // var_dump($errores);
         // echo "</pre>";
 
+        echo "<pre>";
+        var_dump($_FILES);
+        echo "</pre>";
+
 
         // Comprobar que no haya errores en arreglo $errores. Comprueba que este VACIO (empty).
         if (empty($errores)) {
+
+            /**Subida de Archivos**/
+            // Crear una carpeta
+            $carpetaImagenes = '../../imagenes';
+
+            if (!is_dir($carpetaImagenes)) {
+                mkdir($carpetaImagenes);
+            }
+
+            // Subir la imagen
+            move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . "/archivo.jpg" );
+            exit;
+
+
+
+
+
             // Insertar en la DB
             $query = "INSERT INTO propiedades (titulo,precio,descripcion,habitaciones,wc,estacionamiento,creado,vendedorId) VALUES ( '$titulo', '$precio','$descripcion','$habitaciones','$wc','$estacionamiento','$creado','$vendedorId')";
 
