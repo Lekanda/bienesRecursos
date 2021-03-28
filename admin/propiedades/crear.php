@@ -27,9 +27,9 @@
         // echo "<pre>";
         // var_dump($_POST);
         // echo "</pre>";
-        // echo "<pre>";
-        // var_dump($_FILES);
-        // echo "</pre>";
+        echo "<pre>";
+        var_dump($_FILES);
+        echo "</pre>";
 
 
         $titulo = mysqli_real_escape_string($db, $_POST["titulo"]);
