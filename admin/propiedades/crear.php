@@ -3,6 +3,10 @@
     require '../../includes/config/database.php';
     $db = conectarDB();
 
+    // Consulat a DB para obtener los vendedores
+    $consulta = "SELECT * FROM vendedores";
+    $resultado = mysqli_query($db,$consulta);
+
     // Arreglo con mensajes de errores
     $errores = [];
 
@@ -14,6 +18,7 @@
     $wc = '';
     $estacionamiento = '';
     $vendedorId = '';
+    $creado = date('Y/m/d');
 
 
 
@@ -62,12 +67,15 @@
         // Comprobar que no haya errores en arreglo $errores. Comprueba que este VACIO (empty).
         if (empty($errores)) {
             // Insertar en la DB
-            $query = "INSERT INTO propiedades (titulo,precio,descripcion,habitaciones,wc,estacionamiento,vendedorId) VALUES ( '$titulo', '$precio','$descripcion','$habitaciones','$wc','$estacionamiento','$vendedorId')";
+            $query = "INSERT INTO propiedades (titulo,precio,descripcion,habitaciones,wc,estacionamiento,creado,vendedorId) VALUES ( '$titulo', '$precio','$descripcion','$habitaciones','$wc','$estacionamiento','$creado','$vendedorId')";
 
             $resultado = mysqli_query($db,$query);
             
             if($resultado){
-                echo "Insertado correctamente";
+                // echo "Insertado correctamente";
+
+                // Redirecionar al usuario
+                header('Location: /admin');
             }
         }
         
@@ -119,9 +127,7 @@
                 <input type="file" id="imagen" accept="image/jpeg, image/png">
 
                 <label for="descripcion">Descripcion:</label>
-                <textarea id="descripcion" name="descripcion">
-                    <?php echo $descripcion; ?>
-                </textarea>
+                <textarea id="descripcion" name="descripcion"><?php echo $descripcion; ?></textarea>
 
             </fieldset>
             
@@ -172,8 +178,12 @@
 
                 <select name="vendedor" value="<?php echo $vendedorId; ?>">
                     <option value="">-- Seleccione --</option>
-                    <option value="1">Andres</option>
-                    <option value="2">Juan</option>
+                    <?php while ($vendedor = mysqli_fetch_assoc($resultado) ): ?>
+                        <option 
+                            <?php echo $vendedorId === $vendedor['id'] ? 'selected' : ''; ?>
+                            value="<?php echo $vendedor['id'] ?>"><?php echo $vendedor['nombre'] . " " . $vendedor['apellido']; ?>
+                        </option>
+                    <?php endwhile;?>
                 </select>
             </fieldset>
 
