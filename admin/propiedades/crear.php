@@ -18,19 +18,34 @@
     $wc = '';
     $estacionamiento = '';
     $vendedorId = '';
-    $creado = date('Y/m/d');
-
-
-
+    $creado = '';
+    
+    
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        
+        
+        // echo "<pre>";
+        // var_dump($_POST);
+        // echo "</pre>";
+        // echo "<pre>";
+        // var_dump($_FILES);
+        // echo "</pre>";
 
-        $titulo = $_POST["titulo"];
-        $precio = $_POST["precio"];
-        $descripcion = $_POST["descripcion"];
-        $habitaciones = $_POST["habitaciones"];
-        $wc = $_POST["wc"];
-        $estacionamiento = $_POST["estacionamiento"];
-        $vendedorId = $_POST["vendedor"];
+
+        $titulo = mysqli_real_escape_string($db, $_POST["titulo"]);
+        $precio = mysqli_real_escape_string($db, $_POST["precio"]);
+        $descripcion = mysqli_real_escape_string($db, $_POST["descripcion"]);
+        $habitaciones = mysqli_real_escape_string($db, $_POST["habitaciones"]);
+        $wc = mysqli_real_escape_string($db, $_POST["wc"]);
+        $estacionamiento = mysqli_real_escape_string($db, $_POST["estacionamiento"]);
+        $vendedorId = mysqli_real_escape_string($db, $_POST["vendedor"]);
+        $creado = date('Y/m/d');
+
+
+        // Asignar Files hacia una Variable
+        $imagen = $_FILES['imagen'];
+        // var_dump($imagen['name']);
+
 
 
         // Validar que no vaya vacio
@@ -51,17 +66,25 @@
             $errores[] = "Debes añadir un numero de Baños";
         }
         if (!$estacionamiento) {
-            // $errores[] => añade al arreglo $errores
             $errores[] = "Debes añadir un numero de plazas de aparcamiento";
         }
         if (!$vendedorId) {
-            // $errores[] => añade al arreglo $errores
             $errores[] = "Debes añadir un Identificador de vendedor";
         }
+        if (!$imagen['name'] || $imagen['error']) {
+            $errores[] = "Debes seleccionar una imagen";
+        }
+        // Validar las imagenes por tamaño (100Kb)
+        $medida = 1000 * 100;
+        if ($imagen['size'] > $medida) {
+            $errores[] = "Tamaño imagen grande, Max: 100Kb";
+        }
+
+
+
         // echo "<pre>";
         // var_dump($errores);
         // echo "</pre>";
-        // exit;
 
 
         // Comprobar que no haya errores en arreglo $errores. Comprueba que este VACIO (empty).
@@ -72,7 +95,7 @@
             $resultado = mysqli_query($db,$query);
             
             if($resultado){
-                // echo "Insertado correctamente";
+                echo "Insertado correctamente";
 
                 // Redirecionar al usuario
                 header('Location: /admin');
@@ -100,7 +123,7 @@
             </div>
         <?php endforeach; ?> 
 
-        <form method="POST" class="formulario" action="/admin/propiedades/crear.php">
+        <form method="POST" class="formulario" action="/admin/propiedades/crear.php" enctype="multipart/form-data">
             <fieldset>
 
                 <legend>Informacion General</legend>
@@ -124,7 +147,7 @@
                 >
 
                 <label for="imagen">Imagen:</label>
-                <input type="file" id="imagen" accept="image/jpeg, image/png">
+                <input type="file" id="imagen" accept="image/jpeg, image/png" name="imagen">
 
                 <label for="descripcion">Descripcion:</label>
                 <textarea id="descripcion" name="descripcion"><?php echo $descripcion; ?></textarea>
