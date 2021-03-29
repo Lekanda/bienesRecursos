@@ -43,5 +43,30 @@
         }
     }
 
-  
+    .propiedades{
+        text-align: center;
+        th{
+            color: darken($verde, 28);
+        }
+        .cuerpo-tabla-propiedades td:nth-child(even){
+            color: lighten($verde, 18);
+            background-color: $grisOscuro;
+        }
+        .cuerpo-tabla-propiedades td:nth-child(1){
+            color: darken($verde, 5);
+            // background-color: darken($verde, 15);
+        }
+        .cuerpo-tabla-propiedades td:nth-child(2),
+        .cuerpo-tabla-propiedades td:nth-child(4){
+            color: darken($verde, 5);
+        }
+
+        .cuerpo-tabla-propiedades td:nth-child(3){
+            .imagen-tabla{
+                padding: 0;
+                align-content: center;
+
+            }
+        }
+    }
 }
