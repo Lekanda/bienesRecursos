@@ -122,7 +122,6 @@
                 header('Location: /admin?resultado=1');
             }
         }
-        
     }
 
     require '../../includes/funciones.php';
