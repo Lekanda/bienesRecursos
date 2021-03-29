@@ -13,9 +13,22 @@
 
 
 
+
     // Base de Datos
     require '../../includes/config/database.php';
     $db = conectarDB();
+
+
+    // Consulta a DB para traer los datos de la propiedad
+    $consulta = "SELECT * FROM propiedades WHERE id = ${id}";
+    $resultado = mysqli_query($db,$consulta);
+    $propiedad = mysqli_fetch_assoc($resultado);
+
+    // echo "<pre>";
+    // var_dump($propiedad);
+    // echo "</pre>";
+
+
 
     // Consulat a DB para obtener los vendedores
     $consulta = "SELECT * FROM vendedores";
@@ -25,14 +38,15 @@
     $errores = [];
 
     // Ejecuta el codigo despues de que el usuario envie el formulario
-    $titulo = '';
-    $precio = '';
-    $descripcion = '';
-    $habitaciones = '';
-    $wc = '';
-    $estacionamiento = '';
-    $vendedorId = '';
-    $creado = '';
+    $titulo = $propiedad['titulo'];
+    $precio = $propiedad['precio'];
+    $descripcion = $propiedad['descripcion'];
+    $habitaciones = $propiedad['habitaciones'];
+    $wc = $propiedad['wc'];
+    $estacionamiento = $propiedad['estacionamiento'];
+    $vendedorId = $propiedad['vendedorId'];
+    $creado = $propiedad['creado'];
+    $imagenPropiedad = $propiedad['imagen'];
     
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -181,7 +195,18 @@
                 >
 
                 <label for="imagen">Imagen:</label>
-                <input type="file" id="imagen" accept="image/jpeg, image/png" name="imagen">
+                <input 
+                    type="file" 
+                    id="imagen" 
+                    accept="image/jpeg, image/png" 
+                    name="imagen"
+                >
+
+                <img 
+                    src="/imagenes/<?php echo $imagenPropiedad ?>" 
+                    alt="Imagen de la propiedad" 
+                    class="imagen-small"
+                >
 
                 <label for="descripcion">Descripcion:</label>
                 <textarea id="descripcion" name="descripcion"><?php echo $descripcion; ?></textarea>
