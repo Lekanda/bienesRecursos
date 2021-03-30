@@ -10,10 +10,6 @@
         header('Location: /admin');
     }
 
-
-
-
-
     // Base de Datos
     require '../../includes/config/database.php';
     $db = conectarDB();
@@ -27,8 +23,6 @@
     // echo "<pre>";
     // var_dump($propiedad);
     // echo "</pre>";
-
-
 
     // Consulat a DB para obtener los vendedores
     $consulta = "SELECT * FROM vendedores";
@@ -75,7 +69,6 @@
         // var_dump($imagen['name']);
 
 
-
         // Validar que no vaya vacio
         if (!$titulo) {
             // $errores[] => añade al arreglo $errores
@@ -99,55 +92,49 @@
         if (!$vendedorId) {
             $errores[] = "Debes añadir un Identificador de vendedor";
         }
-        if (!$imagen['name'] || $imagen['error']) {
-            $errores[] = "Debes seleccionar una imagen";
-        }
+        
         // Validar las imagenes por tamaño (1000Kb)
         $medida = 1000 * 1000;
         if ($imagen['size'] > $medida) {
             $errores[] = "Tamaño imagen grande, Max: 100Kb";
         }
 
-
-
         // echo "<pre>";
         // var_dump($errores);
         // echo "</pre>";
-
         // echo "<pre>";
-        // var_dump($_FILES);
+        // var_dump($_POST);
         // echo "</pre>";
-
 
         // Comprobar que no haya errores en arreglo $errores. Comprueba que este VACIO (empty).
         if (empty($errores)) {
 
-            /**Subida de Archivos**/
-            // Crear una carpeta
-            $carpetaImagenes = '../../imagenes/';
+            // /**Subida de Archivos**/
+            // // Crear una carpeta
+            // $carpetaImagenes = '../../imagenes/';
 
-            if (!is_dir($carpetaImagenes)) {
-                mkdir($carpetaImagenes);
-            }
+            // if (!is_dir($carpetaImagenes)) {
+            //     mkdir($carpetaImagenes);
+            // }
 
-            // Generar un nombre unico
-            $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
-            var_dump($nombreImagen);
+            // // Generar un nombre unico
+            // $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+            // var_dump($nombreImagen);
 
-            // Subir la imagen
-            move_uploaded_file($imagen['tmp_name'], $carpetaImagenes  . $nombreImagen);
+            // // Subir la imagen
+            // move_uploaded_file($imagen['tmp_name'], $carpetaImagenes  . $nombreImagen);
 
             // Insertar en la DB
-            $query = "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId) VALUES ( '$titulo', '$precio','$nombreImagen','$descripcion','$habitaciones','$wc','$estacionamiento','$creado','$vendedorId')";
-            echo $query;
+            $query = " UPDATE propiedades SET titulo = '${titulo}', precio = '${precio}', descripcion = '${descripcion}', habitaciones = ${habitaciones},  wc = ${wc},  estacionamiento = ${estacionamiento},  vendedorId = ${vendedorId} WHERE id=${id}";
+            // echo $query;
+
 
             $resultado = mysqli_query($db,$query);
-            
             if($resultado){
                 // echo "Insertado correctamente";
 
                 // Redirecionar al usuario
-                header('Location: /admin?resultado=1');
+                header('Location: /admin?resultado=2');
             }
         }
     }
@@ -171,7 +158,7 @@
             </div>
         <?php endforeach; ?> 
 
-        <form method="POST" class="formulario" action="/admin/propiedades/crear.php" enctype="multipart/form-data">
+        <form method="POST" class="formulario" enctype="multipart/form-data">
             <fieldset>
 
                 <legend>Informacion General</legend>

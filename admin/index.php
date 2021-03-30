@@ -11,7 +11,7 @@ $query = "SELECT * FROM propiedades";
 $resultadoConsulta = mysqli_query($db, $query);
 
 
-// Muestra mensaje condicional
+// Muestra mensaje condicional, si no hay lo pone como null
 $resultado = $_GET['resultado'] ?? null;
 
 // Incluye un template
@@ -21,7 +21,9 @@ incluirTemplate('header');
 <main class="contenedor seccion">
     <h1>Administrador de Bienes Raices</h1>
     <?php if (intval($resultado) === 1) : ?>
-        <p class="alerta exito">Anuncio creado correctamente</p>
+            <p class="alerta exito">Anuncio Creado Correctamente</p>
+        <?php elseif (intval($resultado) === 2) :?>
+            <p class="alerta exito">Anuncio Actualizado Correctamente</p>
     <?php endif; ?>
 
     <a href="/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
