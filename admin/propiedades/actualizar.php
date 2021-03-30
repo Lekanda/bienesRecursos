@@ -20,10 +20,6 @@
     $resultado = mysqli_query($db,$consulta);
     $propiedad = mysqli_fetch_assoc($resultado);
 
-    // echo "<pre>";
-    // var_dump($propiedad);
-    // echo "</pre>";
-
     // Consulat a DB para obtener los vendedores
     $consulta = "SELECT * FROM vendedores";
     $resultado = mysqli_query($db,$consulta);
@@ -42,17 +38,7 @@
     $creado = $propiedad['creado'];
     $imagenPropiedad = $propiedad['imagen'];
     
-    
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        
-        
-        // echo "<pre>";
-        // var_dump($_POST);
-        // echo "</pre>";
-        // echo "<pre>";
-        // var_dump($_FILES);
-        // echo "</pre>";
-
 
         $titulo = mysqli_real_escape_string($db, $_POST["titulo"]);
         $precio = mysqli_real_escape_string($db, $_POST["precio"]);
@@ -63,10 +49,9 @@
         $vendedorId = mysqli_real_escape_string($db, $_POST["vendedor"]);
         $creado = date('Y/m/d');
 
-
         // Asignar Files hacia una Variable
         $imagen = $_FILES['imagen'];
-        // var_dump($imagen['name']);
+        var_dump($imagen['name']);
 
 
         // Validar que no vaya vacio
@@ -99,40 +84,38 @@
             $errores[] = "Tamaño imagen grande, Max: 100Kb";
         }
 
-        // echo "<pre>";
-        // var_dump($errores);
-        // echo "</pre>";
-        // echo "<pre>";
-        // var_dump($_POST);
-        // echo "</pre>";
-
         // Comprobar que no haya errores en arreglo $errores. Comprueba que este VACIO (empty).
         if (empty($errores)) {
+            // Crear una carpeta
+            $carpetaImagenes = '../../imagenes/';
+            if (!is_dir($carpetaImagenes)) {
+                mkdir($carpetaImagenes);
+            }
 
-            // /**Subida de Archivos**/
-            // // Crear una carpeta
-            // $carpetaImagenes = '../../imagenes/';
+            // 
+            $nombreImagen = '';
 
-            // if (!is_dir($carpetaImagenes)) {
-            //     mkdir($carpetaImagenes);
-            // }
+            /**Subida de Archivos**/
+            // var_dump($imagen);
+            if ($imagen['name']) {
+                // Generar un nombre unico
+                $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
 
-            // // Generar un nombre unico
-            // $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
-            // var_dump($nombreImagen);
+                // Eliminar imagen previa.
+                unlink($carpetaImagenes . $propiedad['imagen']);
 
-            // // Subir la imagen
-            // move_uploaded_file($imagen['tmp_name'], $carpetaImagenes  . $nombreImagen);
+                 // Subir la imagen
+                move_uploaded_file($imagen['tmp_name'], $carpetaImagenes  . $nombreImagen);
+
+            } else {
+                $nombreImagen = $propiedad['imagen'];
+            }
 
             // Insertar en la DB
-            $query = " UPDATE propiedades SET titulo = '${titulo}', precio = '${precio}', descripcion = '${descripcion}', habitaciones = ${habitaciones},  wc = ${wc},  estacionamiento = ${estacionamiento},  vendedorId = ${vendedorId} WHERE id=${id}";
-            // echo $query;
-
+            $query = " UPDATE propiedades SET titulo = '${titulo}', precio = '${precio}', imagen = '${nombreImagen}' , descripcion = '${descripcion}', habitaciones = ${habitaciones},  wc = ${wc},  estacionamiento = ${estacionamiento},  vendedorId = ${vendedorId} WHERE id=${id}";
 
             $resultado = mysqli_query($db,$query);
             if($resultado){
-                // echo "Insertado correctamente";
-
                 // Redirecionar al usuario
                 header('Location: /admin?resultado=2');
             }
@@ -142,8 +125,6 @@
     require '../../includes/funciones.php';
     incluirTemplate('header');
 ?>  
-
-
 
 
 
