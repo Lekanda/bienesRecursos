@@ -22,6 +22,7 @@
     color: $verde;
     font-weight: $bold;
     font-size: 3rem;
+    margin-left: 2rem;
 }
 
 .iconos-caracteristicas {
@@ -33,7 +34,7 @@
     li {
         flex: 1;
         display: flex;
-
+        margin-left: 2rem;
         img {
             flex:  0 0 3rem;
             margin-right: 1rem;

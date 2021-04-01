@@ -30,5 +30,8 @@
                 </div>
                 
             </div> <!--.barra-->
+
+            <?php echo $inicio ? "<h1>Venta de Casas De Lujo y Apartamentos Exclusivos</h1>" : ''; ?>
+
         </div>
     </header>
