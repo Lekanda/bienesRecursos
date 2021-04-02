@@ -1,22 +1,15 @@
 <?php 
-    /// Importar la DB
+    // Importar la DB
     require 'includes/config/database.php';
     $db = conectarDB();
 
-
     $errores = [];
-
-
 
     // Autenticar el usuario
     // Para poder coger los datos con POST se hace de esta manera.
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // echo "<pre>";
-        // var_dump($_POST);
-        // echo "</pre>";
         $email = mysqli_real_escape_string($db, filter_var($_POST['email'], FILTER_VALIDATE_EMAIL));
         $password = mysqli_real_escape_string($db, $_POST['password']);
-        // var_dump($email);
         
         if (!$email) {
             $errores[] = "El email es obligatorio o no es valido";
@@ -26,23 +19,30 @@
             $errores[] = "El password es obligatorio o no es valido";
         }
         if (empty($errores)) {
-            
+            // Revisar sí el usuario existe.
+            $query = "SELECT * FROM usuarios WHERE email = '${email}'";
+            $resultado = mysqli_query($db,$query);
+            echo "<pre>";
+            var_dump($resultado);
+            echo "</pre>";
+            if ($resultado->num_rows) {
+                // Revisar si el password es correcto
+                
+            } else {
+                $errores[] = "El usuario no existe";
+            }
         }
     }
 
     require 'includes/funciones.php';
     incluirTemplate('header');
 ?> 
-
     <main class="contenedor seccion contenido-centrado">
         <h1>Iniciar Sesion</h1>
-
         <?php foreach ($errores as $error ): ?> 
             <div class="alerta error">
                 <?php echo $error; ?>
             </div>
-        
-
         <?php endforeach; ?>
 
         <form method="POST" class="formulario" novalidate>
@@ -57,9 +57,7 @@
             </fieldset>
             <input type="submit" value="Iniciar Sesion" class="boton boton-verde">
         </form>
-
     </main>
-
 <?php 
     incluirTemplate('footer');
 ?>
