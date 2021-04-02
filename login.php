@@ -30,7 +30,18 @@
                 $auth = password_verify($password, $usuario['password']);
                 if ($auth) {
                     // El usuario esta autenticado
-                    // $errores[] = "OK Logueado";
+                    session_start();
+
+                    // Llenar el arreglo de la sesion.
+                    $_SESSION['usuario'] = $usuario['email'];
+                    $_SESSION['login'] = true;
+
+                    // echo "<pre>";
+                    // var_dump($_SESSION);
+                    // echo "</pre>";
+
+                    header('Location: /admin');
+
                 } else {
                     $errores[] = "El Password es incorrecto";
                 }
