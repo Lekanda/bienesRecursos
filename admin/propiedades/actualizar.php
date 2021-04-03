@@ -1,7 +1,11 @@
 <?php 
-    // echo "<pre>";
-    // var_dump($_GET);
-    // echo "</pre>";
+    require '../../includes/funciones.php';
+    $auth = estaAutenticado();
+    // Restringir el acceso a determinadas paginas.
+    if (!$auth) {
+        header('Location: /');
+    }
+
 
     // Validar la URL por ID valido(INT)
     $id= $_GET['id'];
@@ -122,7 +126,6 @@
         }
     }
 
-    require '../../includes/funciones.php';
     incluirTemplate('header');
 ?>  
 

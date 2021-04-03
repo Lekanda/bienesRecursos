@@ -1,4 +1,12 @@
 <?php 
+
+    require '../../includes/funciones.php';
+    $auth = estaAutenticado();
+    // Restringir el acceso a determinadas paginas.
+    if (!$auth) {
+        header('Location: /');
+    }
+
     // Base de Datos
     require '../../includes/config/database.php';
     $db = conectarDB();
@@ -124,7 +132,6 @@
         }
     }
 
-    require '../../includes/funciones.php';
     incluirTemplate('header');
 ?>  
 

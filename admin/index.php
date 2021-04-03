@@ -1,11 +1,7 @@
 <?php
-    session_start();
-    // echo "<pre>";
-    // var_dump($_SESSION);
-    // echo "</pre>";
-
-    $auth = $_SESSION['login'];
-
+    
+    require '../includes/funciones.php';
+    $auth = estaAutenticado();
     // Restringir el acceso a determinadas paginas.
     if (!$auth) {
         header('Location: /');
@@ -49,11 +45,11 @@
     }
 
 
+// Incluye un template
+incluirTemplate('header');
+?>
 
-    // Incluye un template
-    require '../includes/funciones.php';
-    incluirTemplate('header');
-    ?>
+
     <main class="contenedor seccion">
         <h1>Administrador de Bienes Raices</h1>
         <?php if (intval($resultado) === 1) : ?>
