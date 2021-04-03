@@ -36,10 +36,6 @@
                     $_SESSION['usuario'] = $usuario['email'];
                     $_SESSION['login'] = true;
 
-                    // echo "<pre>";
-                    // var_dump($_SESSION);
-                    // echo "</pre>";
-
                     header('Location: /admin');
 
                 } else {
