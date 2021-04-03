@@ -1,18 +1,17 @@
-# bienesRecursos
-
-- Web de Bienes y Recursos con PHP.
-- *Para el correcto funcionamiento:* en **configuracion** de **Laragon** poner como **raiz** de *Laragon* **"C:\laragon\www\bienesRaices"**.    
+# bienesRaices
+- Web de Bienes y Raices con PHP.    
+- *Para el correcto funcionamiento:* en **configuracion** de **Laragon** poner como **raiz** de *Laragon* **"C:\laragon\www\bienesRaices"**.      
 
 ## Datos
 
-## Datos Iniciales
+### Datos Iniciales
 
-- Este proyecto es una continuacion del proyecto BienesRaices sin PHP del Curso de desarrollo Web de HTML y mas.
+- Este proyecto es una continuacion del proyecto **BienesRaices sin PHP** del **Curso de Desarrollo Web de HTML y mas**. Juan de la Torre (*Udemy*)    
 
+### Fecha inicio  
+   
+- 26-03-21     
 
-## Fecha inicio
-
-- 26-03-21
 
 
 
