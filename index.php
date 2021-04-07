@@ -34,7 +34,7 @@
         ?>
 
         <div class="alinear-derecha">
-            <a href="anuncios.php" class="boton-verde">Ver Todas</a>
+            <a href="/bienesraices/anuncios.php" class="boton-verde">Ver Todas</a>
         </div>
     </section>
 
@@ -92,13 +92,13 @@
         </section>
 
         <section class="testimoniales">
-            <h3>Testimoniales</h3>
+            <h3>Opiniones</h3>
 
             <div class="testimonial">
                 <blockquote>
                     El personal se comportó de una excelente forma, muy buena atención y la casa que me ofrecieron cumple con todas mis expectativas.
                 </blockquote>
-                <p>- Juan De la torre</p>
+                <p>- Andrés Bernaola</p>
             </div>
         </section>
     </div>

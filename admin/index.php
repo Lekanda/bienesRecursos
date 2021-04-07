@@ -4,7 +4,7 @@
     $auth = estaAutenticado();
     // Restringir el acceso a determinadas paginas.
     if (!$auth) {
-        header('Location: /');
+        header('Location: /bienesraices/');
     }
 
     // Importar la conexion de la DB
@@ -39,7 +39,7 @@
             $query = "DELETE FROM propiedades WHERE id = ${id}";
             $resultado = mysqli_query($db,$query);
             if ($resultado) {
-                header('location: /admin?resultado=3' );
+                header('Location: /bienesraices/admin?resultado=3' );
             }
         }
     }
@@ -60,7 +60,7 @@ incluirTemplate('header');
                 <p class="alerta exito">Anuncio Borrado Correctamente</p>
         <?php endif; ?>
 
-        <a href="/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
+        <a href="/bienesraices/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
 
         <table class="propiedades">
             <thead>
@@ -78,7 +78,7 @@ incluirTemplate('header');
                         <td> <?php echo $propiedad['id']; ?> </td>
                         <td><?php echo $propiedad['titulo']; ?></td>
 
-                        <td class="imagen-tabla"><img class="imagen-tabla" src="/imagenes/<?php echo $propiedad['imagen']; ?>" class="imagen-tabla"></td>
+                        <td class="imagen-tabla"><img class="imagen-tabla" src="/bienesraices/imagenes/<?php echo $propiedad['imagen']; ?>" class="imagen-tabla"></td>
 
                         <td><?php echo $propiedad['precio']; ?>€</td>
                         <td>

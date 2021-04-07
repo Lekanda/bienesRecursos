@@ -125,9 +125,8 @@
             
             if($resultado){
                 // echo "Insertado correctamente";
-
                 // Redirecionar al usuario
-                header('Location: /admin?resultado=1');
+                header('Location: /bienesraices/admin?resultado=1');
             }
         }
     }
@@ -150,7 +149,7 @@
             </div>
         <?php endforeach; ?> 
 
-        <form method="POST" class="formulario" action="/admin/propiedades/crear.php" enctype="multipart/form-data">
+        <form method="POST" class="formulario" action="/bienesraices/admin/propiedades/crear.php" enctype="multipart/form-data">
             <fieldset>
 
                 <legend>Informacion General</legend>

@@ -36,7 +36,7 @@
                     $_SESSION['usuario'] = $usuario['email'];
                     $_SESSION['login'] = true;
 
-                    header('Location: /admin');
+                    header('Location: /bienesraices/admin');
 
                 } else {
                     $errores[] = "El Password es incorrecto";

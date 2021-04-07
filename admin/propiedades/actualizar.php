@@ -121,7 +121,7 @@
             $resultado = mysqli_query($db,$query);
             if($resultado){
                 // Redirecionar al usuario
-                header('Location: /admin?resultado=2');
+                header('Location: /bienesraices/admin?resultado=2');
             }
         }
     }
@@ -134,7 +134,7 @@
     <main class="contenedor seccion">
         <h1>Actualizar Propiedad</h1>
 
-        <a href="/admin" class="boton boton-verde">Volver</a>
+        <a href="/bienesraices/admin" class="boton boton-verde">Volver</a>
 
         <?php foreach ($errores as $error) : ?>
             <div class="alerta error">
@@ -174,7 +174,7 @@
                 >
 
                 <img 
-                    src="/imagenes/<?php echo $imagenPropiedad ?>" 
+                    src="/bienesraices/imagenes/<?php echo $imagenPropiedad ?>" 
                     alt="Imagen de la propiedad" 
                     class="imagen-small"
                 >
