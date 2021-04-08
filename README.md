@@ -1,5 +1,5 @@
 # bienesRaices
-- Web de Bienes y Raices con PHP.    
+- Web de Bienes y Raices con PHP (2).    
 - *Para el correcto funcionamiento:* en **configuracion** de **Laragon** poner como **raiz** de *Laragon* **"C:\laragon\www\bienesRaices"**.      
 
 ## Datos
