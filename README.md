@@ -9,8 +9,9 @@
 - Este proyecto es una continuacion del proyecto **BienesRaices sin PHP** del **Curso de Desarrollo Web de HTML y mas**. Juan de la Torre (*Udemy*)    
 
 ### Fecha inicio  
-   
+   <!--  -->
 - 26-03-21     
+
 
 
 
